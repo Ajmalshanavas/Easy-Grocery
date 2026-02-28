@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{%  extends 'dashboard.html'   %}
+{%   block content   %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="col-lg-16 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Our categories</h4>
+                    <p class="card-description">  <code>.table</code>
+                    </p>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Category Name</th>
+
+                            <th>Description</th>
+                             <th>Image</th>
+                              <th>Options</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {%   for i in category     %}
+                        <tr>
+                            <td>{{i.CategoryName}}</td>
+                            <td>{{i.Description}}</td>
+                            <td>
+                                <img src="{{i.CategoryImage.url}}" width="100">
+                            </td>
+                             <td>
+                                <a href="{% url 'edit_category' category_id=i.id     %}">Edit</a>
+                                 <br>
+                                 <a href="{% url  'delete_category' category_id=i.id       %}">Delete</a>
+                            </td>
+                        </tr>
+                        {%  endfor  %}
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+</body>
+</html>
+{%  endblock   %}
