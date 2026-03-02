@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Edit Service | Admin</title>
+    <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" />
+</head>
+<body>
+<div class="container-scroller">
+
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+            <a class="sidebar-brand brand-logo" href="index.html"><img src="{% static 'assets/images/logo.svg' %}" alt="logo" /></a>
+        </div>
+        <ul class="nav">
+            <li class="nav-item nav-category"><span class="nav-link">Navigation</span></li>
+            <li class="nav-item menu-items">
+                <a class="nav-link" href="{% url 'dashboard' %}">
+                    <span class="menu-icon"><i class="mdi mdi-speedometer"></i></span>
+                    <span class="menu-title">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item menu-items">
+                <a class="nav-link" data-toggle="collapse" href="#services-menu" aria-expanded="true">
+                    <span class="menu-icon"><i class="mdi mdi-briefcase"></i></span>
+                    <span class="menu-title">Services</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse show" id="services-menu">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'add_service' %}">Add Service</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'view_services' %}">View Services</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid page-body-wrapper">
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+            <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+                <button class="navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h3 class="page-title">
+                        <span class="page-title-icon bg-gradient-warning text-white mr-2">
+                            <i class="mdi mdi-pencil"></i>
+                        </span> Edit Service
+                    </h3>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Update Service</h4>
+                                <form action="{% url 'update_service' data.id %}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label>Service Name</label>
+                                        <input type="text" name="Service_name" class="form-control" value="{{ data.Service_name }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea name="Description" class="form-control" rows="4">{{ data.Description }}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Icon <small class="text-muted">(Font Awesome class e.g. <code>fa-truck</code>)</small></label>
+                                        <input type="text" name="Icon" class="form-control" value="{{ data.Icon }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Service Image</label>
+                                        {% if data.ServiceImage %}
+                                            <div class="mb-2">
+                                                <img src="{{ data.ServiceImage.url }}" width="100" style="border-radius:6px;">
+                                                <small class="text-muted d-block">Current image — upload new to replace</small>
+                                            </div>
+                                        {% endif %}
+                                        <input type="file" name="ServiceImage" class="form-control">
+                                    </div>
+                                    <button type="submit" class="btn btn-gradient-warning mr-2">Update Service</button>
+                                    <a href="{% url 'view_services' %}" class="btn btn-light">Cancel</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'assets/vendors/js/vendor.bundle.base.js' %}"></script>
+<script src="{% static 'assets/js/off-canvas.js' %}"></script>
+<script src="{% static 'assets/js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'assets/js/template.js' %}"></script>
+</body>
+</html>

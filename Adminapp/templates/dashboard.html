@@ -86,75 +86,96 @@
           <li class="nav-item nav-category">
             <span class="nav-link">Navigation</span>
           </li>
+
+          <!-- Dashboard -->
           <li class="nav-item menu-items">
-            <a class="nav-link" href="{% url  'dashboard'    %}">
+            <a class="nav-link" href="{% url 'dashboard' %}">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
+
+          <!-- Categories -->
           <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link" data-toggle="collapse" href="#categories-menu" aria-expanded="false">
               <span class="menu-icon">
                 <i class="mdi mdi-view-grid"></i>
               </span>
               <span class="menu-title">Categories</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-basic1">
+            <div class="collapse" id="categories-menu">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{%  url  'add_category'   %}">Add new category</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{%   url   'view_category'    %}">View categories</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'add_category' %}">Add Category</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'view_category' %}">View Categories</a></li>
               </ul>
             </div>
           </li>
 
-            <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+          <!-- Products -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#products-menu" aria-expanded="false">
               <span class="menu-icon">
                 <i class="mdi mdi-warehouse"></i>
               </span>
               <span class="menu-title">Products</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-basic">
+            <div class="collapse" id="products-menu">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{%  url 'add_product'   %}">Add new products</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{%   url   'view_product'          %}">View products</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'add_product' %}">Add Product</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'view_product' %}">View Products</a></li>
               </ul>
             </div>
           </li>
 
+          <!-- Services -->
           <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/tables/basic-table.html">
+            <a class="nav-link" data-toggle="collapse" href="#services-menu" aria-expanded="false">
               <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
+                <i class="mdi mdi-briefcase"></i>
               </span>
-              <span class="menu-title">Tables</span>
-            </a>
-          </li>
-
-
-          <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-              <span class="menu-icon">
-                <i class="mdi mdi-security"></i>
-              </span>
-              <span class="menu-title">User Pages</span>
+              <span class="menu-title">Services</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="auth">
+            <div class="collapse" id="services-menu">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'add_service' %}">Add Service</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'view_services' %}">View Services</a></li>
               </ul>
             </div>
+          </li>
+
+          <!-- Orders -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="#">
+              <span class="menu-icon">
+                <i class="mdi mdi-cart"></i>
+              </span>
+              <span class="menu-title">Orders</span>
+            </a>
+          </li>
+
+          <!-- Contact Messages -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{% url 'contact_data' %}">
+              <span class="menu-icon">
+                <i class="mdi mdi-email"></i>
+              </span>
+              <span class="menu-title">Contact Messages</span>
+            </a>
+          </li>
+
+          <!-- Logout -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{% url 'admin_logout' %}">
+              <span class="menu-icon">
+                <i class="mdi mdi-logout"></i>
+              </span>
+              <span class="menu-title">Logout</span>
+            </a>
           </li>
 
         </ul>
@@ -391,8 +412,8 @@
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">$12.34</h3>
-                          <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
+                          <h3 class="mb-0">{{categories}}</h3>
+                          <!---<p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>--->
                         </div>
                       </div>
                       <div class="col-3">
@@ -401,7 +422,7 @@
                         </div>
                       </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Potential growth</h6>
+                    <h6 class="text-muted font-weight-normal">Categories</h6>
                   </div>
                 </div>
               </div>
@@ -411,8 +432,8 @@
                     <div class="row">
                       <div class="col-9">
                         <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">$17.34</h3>
-                          <p class="text-success ml-2 mb-0 font-weight-medium">+11%</p>
+                          <h3 class="mb-0">{{products}}</h3>
+                          <!---<p class="text-success ml-2 mb-0 font-weight-medium">+11%</p>--->
                         </div>
                       </div>
                       <div class="col-3">

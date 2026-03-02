@@ -31,7 +31,7 @@
                             <td>{{i.CategoryName}}</td>
                             <td>{{i.Description}}</td>
                             <td>
-                                <img src="{{i.CategoryImage.url}}" width="100">
+                                {<img src="{{i.CategoryImage.url}}" width="100">}
                             </td>
                              <td>
                                 <a href="{% url 'edit_category' category_id=i.id     %}">Edit</a>
@@ -47,6 +47,32 @@
                   </div>
                 </div>
               </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+{% if messages %}
+   {% for msg in messages  %}
+       {% if msg.tags == "success" %}
+           <script>
+               swal('{{msg}}','','success')
+           </script>
+       {% elif msg.tags == "warning" %}
+       <script>
+               swal('{{msg}}','','warning')
+           </script>
+       {% elif msg.tags == "error" %}
+        <script>
+               swal('{{msg}}','','error')
+           </script>
+        {% elif msg.tags == "info" %}
+        <script>
+               swal('{{msg}}','','info')
+           </script>
+
+
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
 </body>
 </html>
 {%  endblock   %}

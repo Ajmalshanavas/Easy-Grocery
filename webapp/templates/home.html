@@ -97,7 +97,7 @@
         <div class="humberger__menu__contact">
             <ul>
                 <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order above Rs350</li>
+                <li>Free Shipping for all Order above Rs1000</li>
             </ul>
         </div>
     </div>
@@ -112,28 +112,15 @@
                         <div class="header__top__left">
                             <ul>
                                 <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Free Shipping for all Order above Rs 350
+                                <li>Free Shipping for all Order above Rs 1000
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            </div>
-                            <div class="header__top__right__language">
-                                <img src="{% static 'web/img/language.png' %}" alt="">
-                                <div>English</div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
-                            </div>
+
+
                             {% if request.session.username  %}
                             <div class="header__top__right__auth">
                                 <a href="{%  url  'user_logout'    %}"><i class="fa fa-user"></i> Welcome {{request.session.username}} / Logout</a>
@@ -159,7 +146,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="{%  url 'home'   %}">Home</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
+
                             <li><a href="#">Categories</a>
                                 <ul class="header__menu__dropdown">
                                     {% for i in categories  %}
@@ -170,6 +157,7 @@
                             <li><a href="{%  url  'about'     %}">About</a></li>
                             <li><a href="{%  url 'our_products'    %}">Products</a></li>
                             <li><a href="{%  url 'contact'   %}">Contact</a></li>
+                            <li><a href="{%  url 'services' %}">Services</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -177,7 +165,9 @@
                     <div class="header__cart">
                         <ul>
                            <!---- <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>--->
-                            <li><a href="{% url 'cart'   %}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            {% if request.session.username %}
+                            <li><a href="{% url 'cart'   %}"><i class="fa fa-shopping-bag"></i> <span>{{cart_count}}</span></a></li>
+                            {%  endif %}
                         </ul>
                         <!---<div class="header__cart__price">item: <span>$150.00</span></div>--->
                     </div>
@@ -433,7 +423,7 @@
     <!-- Banner End -->
 
     <!-- Latest Product Section Begin -->
-    <section class="latest-product spad">
+    <!---<section class="latest-product spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
@@ -969,7 +959,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>--->
     <!-- Latest Product Section End -->
 
     <!-- Blog Section Begin -->
@@ -1043,9 +1033,9 @@
                             <a href="./index.html"><img src="{% static 'web/img/logo.png' %}" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
+                            <li>Address:Kerala</li>
                             <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
+                            <li>Email: EasyGrocery@gmail.com</li>
                         </ul>
                     </div>
                 </div>
@@ -1053,9 +1043,9 @@
                     <div class="footer__widget">
                         <h6>Useful Links</h6>
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
+                            <li><a href="{% url 'about'   %}">About Us</a></li>
+
+
                             <li><a href="#">Delivery infomation</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                             <li><a href="#">Our Sitemap</a></li>
@@ -1063,14 +1053,14 @@
                         <ul>
                             <li><a href="#">Who We Are</a></li>
                             <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
+
+                            <li><a href="{% url 'contact' %}">Contact</a></li>
                             <li><a href="#">Innovation</a></li>
                             <li><a href="#">Testimonials</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12">
+                <!---<div class="col-lg-4 col-md-12">
                     <div class="footer__widget">
                         <h6>Join Our Newsletter Now</h6>
                         <p>Get E-mail updates about our latest shop and special offers.</p>
@@ -1078,14 +1068,9 @@
                             <input type="text" placeholder="Enter your mail">
                             <button type="submit" class="site-btn">Subscribe</button>
                         </form>
-                        <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
+
                     </div>
-                </div>
+                </div>--->
             </div>
             <div class="row">
                 <div class="col-lg-12">

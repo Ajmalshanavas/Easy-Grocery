@@ -8,20 +8,17 @@
 </head>
 <body>
 <div class="card-body">
-                    <h4 class="card-title">Add Products</h4>
+                    <h4 class="card-title">Edit Product</h4>
                     <p class="card-description">  </p>
-                    <form method="POST" action="{%  url  'save_product'      %}" enctype="multipart/form-data" class="forms-sample">
+                    <form method="POST" action="{% url 'update_product' data.id %}" enctype="multipart/form-data" class="forms-sample">
                         {%  csrf_token   %}
                       <div class="form-group">
                         <label for="exampleSelectGender">Category</label>
                         <select class="form-control" id="exampleSelectGender" name="Category_name" required value="{{data.Category_name}}">
                            <option>Select category</option>
-                        {%  for i in category           %}
-                          <option>value="{{ i.CategoryName }}"
-            {% if i.CategoryName == data.Category_name %}
-                selected
-            {% endif %}{{i.CategoryName}}</option>
-                        {%  endfor   %}
+                        {% for i in category %}
+                          <option value="{{ i.CategoryName }}" {% if i.CategoryName == data.Category_name %}selected{% endif %}>{{ i.CategoryName }}</option>
+                        {% endfor %}
 
                         </select>
                       </div>
@@ -37,13 +34,18 @@
                       </div>
                      <div class="form-group">
                         <label for="exampleTextarea1">Description</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="4" name="Description" required value="{{data.Description}}"></textarea>
+                        <textarea class="form-control" id="exampleTextarea1" rows="4" name="Description" required>{{data.Description}}</textarea>
                       </div>
                       <div class="form-group">
-                        <label>Image upload</label>
-                        <input type="file" name="img[]" class="file-upload-default">
+                        <label>Product Image <small class="text-muted">(leave empty to keep current)</small></label>
+                        {% if data.ProductImage %}
+                        <div class="mb-2">
+                            <img src="{{ data.ProductImage.url }}" alt="Current" style="height:70px; border-radius:6px; object-fit:cover;">
+                            <small class="text-muted d-block">Current image</small>
+                        </div>
+                        {% endif %}
                         <div class="input-group col-xs-12">
-                          <input type="file" class="form-control file-upload-info" placeholder="Upload Image" name="ProductImage" required value="{{data.ProductImage}}">
+                          <input type="file" class="form-control file-upload-info" placeholder="Upload New Image" name="ProductImage">
                           <span class="input-group-append">
                             <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
                           </span>
@@ -56,6 +58,16 @@
                     </form>
                   </div>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+   {% for msg in messages %}
+       {% if msg.tags == "success" %}
+           <script>swal('{{msg}}','','success')</script>
+       {% elif msg.tags == "error" %}
+           <script>swal('{{msg}}','','error')</script>
+       {% endif %}
+   {% endfor %}
+{% endif %}
 </body>
 </html>
 {%  endblock   %}

@@ -25,7 +25,8 @@ from EasyGrocery import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Store/',include(Adminapp.urls)),
-    path('Easygrocery/',include(webapp.urls))
+    path('Easygrocery/',include(webapp.urls)),
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()

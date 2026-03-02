@@ -5,7 +5,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>Easy Grocery | About Us</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&amp;display=swap" rel="stylesheet">
@@ -35,10 +35,10 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+               <!---- <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>--->
+                 <!----<li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>--->
             </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            <!---<div class="header__cart__price">item: <span>$150.00</span></div >--->
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -58,7 +58,7 @@
             <ul>
                 <li class="active"><a href="./index.html">Home</a></li>
                 <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="#">Pages</a>
+                <li><a href="#">Categories</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="./shop-details.html">Shop Details</a></li>
                         <li><a href="./shoping-cart.html">Shoping Cart</a></li>
@@ -67,7 +67,7 @@
                     </ul>
                 </li>
                 <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="./contact.html">Products</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"><div class="slicknav_menu"><a href="#" aria-haspopup="true" role="button" tabindex="0" class="slicknav_btn slicknav_collapsed" style="outline: none;"><span class="slicknav_menutxt">MENU</span><span class="slicknav_icon"><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span></span></a><nav class="slicknav_nav slicknav_hidden" aria-hidden="true" role="menu" style="display: none;">
@@ -79,11 +79,12 @@
                         <li><a href="./shop-details.html" role="menuitem" tabindex="-1">Shop Details</a></li>
                         <li><a href="./shoping-cart.html" role="menuitem" tabindex="-1">Shoping Cart</a></li>
                         <li><a href="./checkout.html" role="menuitem" tabindex="-1">Check Out</a></li>
-                        <li><a href="./blog-details.html" role="menuitem" tabindex="-1">Blog Details</a></li>
+                        <li><a href="./blog-details.html" role="menuitem" tabindex="-1">log Details</a></li>
                     </ul>
                 </li>
-                <li><a href="./blog.html" role="menuitem">Blog</a></li>
-                <li><a href="./contact.html" role="menuitem">Contact</a></li>
+                <li><a href="./blog.html" role="menuitem">ABOUT</a></li>
+                <li><a href="./contact.html" role="menuitem">PRODUCTS</a></li>
+                <li><a href="./contact.html" role="menuitem">SERVICES</a></li>
             </ul>
         </nav></div></div>
         <div class="header__top__right__social">
@@ -94,8 +95,8 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
+                <li><i class="fa fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2aaa7aeaead82a1adaeadb0aeaba0eca1adaf">[email&#160;protected]</a></li>
+                <li>Free Shipping for all Order above Rs1000</li>
             </ul>
         </div>
     </div>
@@ -106,34 +107,28 @@
         <div class="header__top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Free Shipping for all Order of $99</li>
+                                <li><i class="fa fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="78101d141417381b1714170a14111a561b1715">[email&#160;protected]</a></li>
+                                <li>Free Shipping for all Order above Rs 350
+                                </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                            </div>
-                            <div class="header__top__right__language">
-                                <img src="{% static 'web/img/language.png' %}" alt="">
-                                <div>English</div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
-                            </div>
+
+
+                            {% if request.session.username  %}
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                <a href="{%  url  'user_logout'    %}"><i class="fa fa-user"></i> Welcome {{request.session.username}} / Logout</a>
                             </div>
+                            {%  else %}
+                             <div class="header__top__right__auth">
+                                <a href="{%  url   'Sign_in'    %}"><i class="fa fa-user"></i> Login</a>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -146,31 +141,34 @@
                         <a href="./index.html"><img src="{% static 'web/img/logo.png' %}" alt=""></a>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-md-9">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
+                            <li class="active"><a href="{%  url 'home'   %}">Home</a></li>
                             <li><a href="./shop-grid.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li><a href="#">Categories</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    {% for i in categories  %}
+                                    <li><a href="{%  url    'filtered_products'  cat_name=i.CategoryName       %}">{{i.CategoryName}}</a></li>
+                                    {%  endfor  %}
                                 </ul>
                             </li>
-                            <li class="active"><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li><a href="{%  url  'about'     %}">About</a></li>
+                            <li><a href="{%  url 'our_products'    %}">Products</a></li>
+                            <li><a href="{%  url 'contact'   %}">Contact</a></li>
+                            <li><a href="{% url 'services'  %}">Services</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                           <!---- <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>--->
+                            {% if request.session.username %}
+                            <li><a href="{% url 'cart'   %}"><i class="fa fa-shopping-bag"></i> <span>{{cart_count}}</span></a></li>
+                            {%  endif %}
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <!---<div class="header__cart__price">item: <span>$150.00</span></div>--->
                     </div>
                 </div>
             </div>
@@ -182,27 +180,19 @@
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
-    <section class="hero hero-normal">
+    <section class="hero">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>All Categories</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit &amp; Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter &amp; Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya &amp; Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            {% for i in categories %}
+                            <li><a href="{%  url 'filtered_products' cat_name=i.CategoryName    %}">{{i.CategoryName}}</a></li>
+                            {%  endfor  %}
                         </ul>
                     </div>
                 </div>
@@ -228,30 +218,38 @@
                             </div>
                         </div>
                     </div>
+                    <div class="hero__item set-bg" data-setbg="{% static 'web/img/hero/banner.jpg'%}" style="background-image: url(&quot;img/hero/banner.jpg&quot;);">
+                        <div class="hero__text">
+                            <span>FRUIT FRESH</span>
+                            <h2>Vegetable <br>100% Organic</h2>
+                            <p>Free Pickup and Delivery Available</p>
+                            <a href="#" class="primary-btn">SHOP NOW</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Hero Section End -->
 
-    <!-- Blog Details Hero Begin -->
+    <!-- About Hero Begin -->
     <section class="blog-details-hero set-bg" data-setbg="{% static 'web/img/blog/details/details-hero.jpg' %}" style="background-image: url('{% static 'web/img/blog/details/details-hero.jpg' %}');">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="blog__details__hero__text">
-                        <h2>ABOUT</h2>
+                        <h2>ABOUT US</h2>
                         <ul>
-                            <li>By Michael Scofield</li>
-                            <li>January 14, 2019</li>
-                            <li>8 Comments</li>
+                            <li>Easy Grocery</li>
+                            <li>Fresh &amp; Organic</li>
+                            <li>Trusted Since 2020</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Blog Details Hero End -->
+    <!-- About Hero End -->
 
     <!-- Blog Details Section Begin -->
     <section class="blog-details spad">
@@ -259,84 +257,46 @@
             <div class="row">
                 <div class="col-lg-4 col-md-5 order-md-1 order-2">
                     <div class="blog__sidebar">
-                        <div class="blog__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Search...">
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
-                        </div>
                         <div class="blog__sidebar__item">
-                            <h4>Categories</h4>
+                            <h4>Quick Links</h4>
                             <ul>
-                                <li><a href="#">All</a></li>
-                                <li><a href="#">Beauty (20)</a></li>
-                                <li><a href="#">Food (5)</a></li>
-                                <li><a href="#">Life Style (9)</a></li>
-                                <li><a href="#">Travel (10)</a></li>
+                                <li><a href="{% url 'home' %}">Home</a></li>
+                                <li><a href="{% url 'our_products' %}">Shop</a></li>
+                                <li><a href="{% url 'services' %}">Our Services</a></li>
+                                <li><a href="{% url 'contact' %}">Contact Us</a></li>
                             </ul>
                         </div>
                         <div class="blog__sidebar__item">
-                            <h4>Recent News</h4>
-                            <div class="blog__sidebar__recent">
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="{% static 'web/img/blog/sidebar/sr-1.jpg' %}" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>09 Kinds Of Vegetables<br> Protect The Liver</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="{% static 'web/img/blog/sidebar/sr-2.jpg' %}" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>Tips You To Balance<br> Nutrition Meal Day</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="{% static 'web/img/blog/sidebar/sr-3.jpg' %}" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>4 Principles Help You Lose <br>Weight With Vegetables</h6>
-                                        <span>MAR 05, 2019</span>
-                                    </div>
-                                </a>
-                            </div>
+                            <h4>Our Product Categories</h4>
+                            <ul>
+                                {% for i in categories %}
+                                <li><a href="{% url 'filtered_products' cat_name=i.CategoryName %}">{{ i.CategoryName }}</a></li>
+                                {% endfor %}
+                            </ul>
                         </div>
                         <div class="blog__sidebar__item">
-                            <h4>Search By</h4>
+                            <h4>Why Choose Us</h4>
                             <div class="blog__sidebar__item__tags">
-                                <a href="#">Apple</a>
-                                <a href="#">Beauty</a>
-                                <a href="#">Vegetables</a>
-                                <a href="#">Fruit</a>
-                                <a href="#">Healthy Food</a>
-                                <a href="#">Lifestyle</a>
+                                <a href="#">Fresh Daily</a>
+                                <a href="#">100% Organic</a>
+                                <a href="#">Fast Delivery</a>
+                                <a href="#">Best Prices</a>
+                                <a href="#">Trusted Quality</a>
+                                <a href="#">24/7 Support</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7 order-md-1 order-1">
                     <div class="blog__details__text">
-                        <img src="{% static 'web/img/blog/details/details-pic.jpg' %}" alt="">
-                        <p>Sed porttitor lectus nibh. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet
-                            dui. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Mauris blandit
-                            aliquet elit, eget tincidunt nibh pulvinar a. Vivamus magna justo, lacinia eget consectetur
-                            sed, convallis at tellus. Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada.
-                            Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Proin eget tortor risus.
-                            Donec rutrum congue leo eget malesuada. Curabitur non nulla sit amet nisl tempus convallis
-                            quis ac lectus. Donec sollicitudin molestie malesuada. Nulla quis lorem ut libero malesuada
-                            feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
-                        <h3>The corner window forms a place within a place that is a resting point within the large
-                            space.</h3>
-                        <p>The study area is located at the back with a view of the vast nature. Together with the other
-                            buildings, a congruent story has been managed in which the whole has a reinforcing effect on
-                            the components. The use of materials seeks connection to the main house, the adjacent
-                            stables</p>
+                        <img src="{% static 'web/img/blog/details/details-pic.jpg' %}" alt="Easy Grocery Store">
+                        <h3>Welcome to Easy Grocery — Your Trusted Online Grocery Store</h3>
+                        <p>At Easy Grocery, we believe that everyone deserves access to fresh, high-quality groceries at affordable prices. Founded with a simple mission — to make grocery shopping easy, fast, and enjoyable — we bring the best of the market straight to your doorstep.</p>
+                        <p>We carefully source our products from trusted local farmers and certified organic suppliers to ensure that every item you receive is fresh, nutritious, and full of flavour. From crisp seasonal vegetables to ripe tropical fruits, wholesome dairy, and everyday pantry essentials, Easy Grocery has everything your family needs.</p>
+                        <h3>Our Mission</h3>
+                        <p>Our mission is simple — to make healthy, fresh, and affordable groceries accessible to every household. We are committed to reducing food waste, supporting local farmers, and delivering a seamless shopping experience that saves you time and money.</p>
+                        <h3>Why Shop With Us?</h3>
+                        <p>We offer same-day and next-day delivery across the city, a wide range of 100% organic products, easy returns, and a secure checkout experience. Our dedicated customer support team is available 24/7 to assist you with any questions or concerns. Whether you're stocking up for the week or looking for a last-minute ingredient, Easy Grocery has got you covered.</p>
                     </div>
                     <div class="blog__details__content">
                         <div class="row">
@@ -346,21 +306,21 @@
                                         <img src="{% static 'web/img/blog/details/details-author.jpg' %}" alt="">
                                     </div>
                                     <div class="blog__details__author__text">
-                                        <h6>Michael Scofield</h6>
-                                        <span>Admin</span>
+                                        <h6>Easy Grocery Team</h6>
+                                        <span>Fresh &amp; Trusted Since 2020</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="blog__details__widget">
                                     <ul>
-                                        <li><span>Categories:</span> Food</li>
-                                        <li><span>Tags:</span> All, Trending, Cooking, Healthy Food, Life Style</li>
+                                        <li><span>Location:</span> Delivering across the city</li>
+                                        <li><span>Speciality:</span> Fresh, Organic, Affordable Groceries</li>
                                     </ul>
                                     <div class="blog__details__social">
                                         <a href="#"><i class="fa fa-facebook"></i></a>
                                         <a href="#"><i class="fa fa-twitter"></i></a>
-                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                        <a href="#"><i class="fa fa-instagram"></i></a>
                                         <a href="#"><i class="fa fa-linkedin"></i></a>
                                         <a href="#"><i class="fa fa-envelope"></i></a>
                                     </div>
@@ -374,13 +334,13 @@
     </section>
     <!-- Blog Details Section End -->
 
-    <!-- Related Blog Section Begin -->
+    <!-- Our Values Section Begin -->
     <section class="related-blog spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title related-blog-title">
-                        <h2>Post You May Like</h2>
+                        <h2>Our Core Values</h2>
                     </div>
                 </div>
             </div>
@@ -388,52 +348,52 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="{% static 'web/img/blog/blog-1.jpg' %}" alt="">
+                            <img src="{% static 'web/img/blog/blog-1.jpg' %}" alt="Fresh Products">
                         </div>
                         <div class="blog__item__text">
                             <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
+                                <li><i class="fa fa-leaf"></i> 100% Organic</li>
+                                <li><i class="fa fa-check-circle"></i> Certified</li>
                             </ul>
-                            <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                            <h5><a href="#">Freshness Guaranteed Every Day</a></h5>
+                            <p>We source our products daily from local farms to ensure maximum freshness and nutrition in every order you place.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="{% static 'web/img/blog/blog-2.jpg' %}" alt="">
+                            <img src="{% static 'web/img/blog/blog-2.jpg' %}" alt="Fast Delivery">
                         </div>
                         <div class="blog__item__text">
                             <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
+                                <li><i class="fa fa-truck"></i> Fast Delivery</li>
+                                <li><i class="fa fa-clock-o"></i> Same Day</li>
                             </ul>
-                            <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                            <h5><a href="#">Speedy Delivery Right to Your Door</a></h5>
+                            <p>With our reliable delivery network, your groceries arrive fresh and on time — whether same-day or next-day delivery.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="{% static 'web/img/blog/blog-3.jpg' %}" alt="">
+                            <img src="{% static 'web/img/blog/blog-3.jpg' %}" alt="Affordable Prices">
                         </div>
                         <div class="blog__item__text">
                             <ul>
-                                <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                <li><i class="fa fa-comment-o"></i> 5</li>
+                                <li><i class="fa fa-tag"></i> Best Prices</li>
+                                <li><i class="fa fa-smile-o"></i> Happy Customers</li>
                             </ul>
-                            <h5><a href="#">Visit the clean farm in the US</a></h5>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                            <h5><a href="#">Affordable Prices, No Compromise</a></h5>
+                            <p>We believe healthy eating shouldn't break the bank. Easy Grocery offers the best prices on fresh and organic products every day.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Related Blog Section End -->
+    <!-- Our Values Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer spad">
@@ -447,7 +407,7 @@
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
                             <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
+                            <li>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d0b8b5bcbcbf90b3bfbcbfa2bcb9b2feb3bfbd">[email&#160;protected]</a></li>
                         </ul>
                     </div>
                 </div>
@@ -493,7 +453,7 @@
                 <div class="col-lg-12">
                     <div class="footer__copyright">
                         <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright ©<script>document.write(new Date().getFullYear());</script>2026 All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  Copyright ©<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script>2026 All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
                         <div class="footer__copyright__payment"><img src="{% static 'web/img/payment-item.png' %}" alt=""></div>
                     </div>
@@ -505,16 +465,10 @@
 
     <!-- Js Plugins -->
     <script src="{% static 'web/js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'web/js/jquery.nice-select.min.js' %}"></script>
-    <script src="{% static 'web/js/jquery-ui.min.js' %}"></script>
-    <script src="{% static 'web/js/jquery.slicknav.js' %}"></script>
-    <script src="{% static 'web/js/mixitup.min.js' %}"></script>
-    <script src="{% static 'web/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'web/js/main.js' %}"></script>
-
-
-
-
-
-</body></html>
+    <script src="{% static 'web/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'web/js/jquery.nice-select.min.js'%}"></script>
+    <script src="{% static 'web/js/jquery-ui.min.js'%}"></script>
+    <script src="{% static 'web/js/jquery.slicknav.js'%}"></script>
+    <script src="{% static 'web/js/mixitup.min.js'%}"></script>
+    <script src="{% static 'web/js/owl.carousel.min.js'%}"></script>
+    <script src="{% static 'web/js/main.js'%}"></script>
