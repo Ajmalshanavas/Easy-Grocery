@@ -96,7 +96,7 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                <li><i class="fa fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="452d2029292a05262a292a37292c276b262a28">[email&#160;protected]</a></li>
                 <li>Free Shipping for all Order above Rs1000</li>
             </ul>
         </div>
@@ -111,7 +111,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                                <li><i class="fa fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7cfc2cbcbc8e7c4c8cbc8d5cbcec589c4c8ca">[email&#160;protected]</a></li>
                                 <li>Free Shipping for all Order above Rs 350
                                 </li>
                             </ul>
@@ -293,7 +293,7 @@
                     <div class="contact__widget">
                         <span class="icon_mail_alt"></span>
                         <h4>Email</h4>
-                        <p>hello@colorlib.com</p>
+                        <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="365e535a5a597655595a59445a5f541855595b">[email&#160;protected]</a></p>
                     </div>
                 </div>
             </div>
@@ -327,21 +327,122 @@
                     </div>
                 </div>
             </div>
-            <form action="{%   url   'save_contact'       %}" method="POST" >
+            <!-- Django Messages (server-side alerts e.g. duplicate email) -->
+            {% for message in messages %}
+            <div class="row" style="margin-bottom: 15px;">
+                <div class="col-lg-12">
+                    <div style="padding: 12px 18px; border-radius: 4px; font-size: 14px; font-weight: 600;
+                        {% if message.tags == 'error' %}
+                            background:#fdecea; color:#c0392b; border:1px solid #e53637;
+                        {% else %}
+                            background:#eafaf1; color:#1e8449; border:1px solid #27ae60;
+                        {% endif %}">
+                        {% if message.tags == 'error' %}❌{% else %}✅{% endif %} {{ message }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- Client-side Validation Alert -->
+            <div id="contact-alert" style="display:none; margin-bottom: 15px;" class="row">
+                <div class="col-lg-12">
+                    <div id="contact-alert-box" style="padding: 12px 18px; border-radius: 4px; font-size: 14px; font-weight: 600;"></div>
+                </div>
+            </div>
+
+            <form action="{%   url   'save_contact'       %}" method="POST" id="contactForm" novalidate>
                   {%   csrf_token    %}
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Your name" name="Name">
+                        <input type="text" placeholder="Your name" name="Name" id="contactName"
+                               style="border: 1px solid #e1e1e1;">
+                        <div id="nameError" style="color:#e53637; font-size:12px; margin-top:4px; display:none;">
+                            ⚠ Please enter your name.
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Your Email" name="Email">
+                        <input type="text" placeholder="Your Email" name="Email" id="contactEmail"
+                               style="border: 1px solid #e1e1e1;">
+                        <div id="emailError" style="color:#e53637; font-size:12px; margin-top:4px; display:none;">
+                            ⚠ Please enter a valid email address.
+                        </div>
+                        <div id="emailDupError" style="color:#e53637; font-size:12px; margin-top:4px; display:none;">
+                            ⚠ This email has already been used to send a message.
+                        </div>
                     </div>
                     <div class="col-lg-12 text-center">
-                        <textarea placeholder="Your message" name="Message"></textarea>
+                        <textarea placeholder="Your message" name="Message" id="contactMessage"
+                                  style="border: 1px solid #e1e1e1;"></textarea>
+                        <div id="messageError" style="color:#e53637; font-size:12px; margin-top:4px; margin-bottom:8px; display:none;">
+                            ⚠ Please enter your message.
+                        </div>
                         <button type="submit" class="site-btn">SEND MESSAGE</button>
                     </div>
                 </div>
             </form>
+
+            <script>
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                var name    = document.getElementById('contactName');
+                var email   = document.getElementById('contactEmail');
+                var message = document.getElementById('contactMessage');
+
+                var nameErr    = document.getElementById('nameError');
+                var emailErr   = document.getElementById('emailError');
+                var messageErr = document.getElementById('messageError');
+                var alertBox   = document.getElementById('contact-alert');
+                var alertInner = document.getElementById('contact-alert-box');
+
+                // Reset errors
+                nameErr.style.display    = 'none';
+                emailErr.style.display   = 'none';
+                messageErr.style.display = 'none';
+                name.style.borderColor   = '#e1e1e1';
+                email.style.borderColor  = '#e1e1e1';
+                message.style.borderColor= '#e1e1e1';
+                alertBox.style.display   = 'none';
+
+                var valid = true;
+                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (name.value.trim() === '') {
+                    nameErr.style.display  = 'block';
+                    name.style.borderColor = '#e53637';
+                    valid = false;
+                }
+                if (!emailPattern.test(email.value.trim())) {
+                    emailErr.style.display  = 'block';
+                    email.style.borderColor = '#e53637';
+                    valid = false;
+                }
+                if (message.value.trim() === '') {
+                    messageErr.style.display  = 'block';
+                    message.style.borderColor = '#e53637';
+                    valid = false;
+                }
+
+                if (!valid) {
+                    e.preventDefault();
+                    alertInner.textContent = '❌ Please fix the errors below before sending your message.';
+                    alertInner.style.background = '#fdecea';
+                    alertInner.style.color      = '#c0392b';
+                    alertInner.style.border     = '1px solid #e53637';
+                    alertBox.style.display      = 'block';
+                    alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+
+            // Live border reset on input
+            ['contactName','contactEmail','contactMessage'].forEach(function(id) {
+                document.getElementById(id).addEventListener('input', function() {
+                    this.style.borderColor = '#e1e1e1';
+                    var errId = id === 'contactName'    ? 'nameError'
+                              : id === 'contactEmail'   ? 'emailError'
+                              : 'messageError';
+                    document.getElementById(errId).style.display = 'none';
+                });
+            });
+            </script>
         </div>
     </div>
     <!-- Contact Form End -->
@@ -358,7 +459,7 @@
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
                             <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
+                            <li>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea6aba2a2a18eada1a2a1bca2a7ace0ada1a3">[email&#160;protected]</a></li>
                         </ul>
                     </div>
                 </div>
@@ -404,7 +505,7 @@
                 <div class="col-lg-12">
                     <div class="footer__copyright">
                         <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright ©<script>document.write(new Date().getFullYear());</script>2026 All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  Copyright ©<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script>2026 All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
                         <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
                     </div>
@@ -413,19 +514,3 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-
-    <!-- Js Plugins -->
-     <script src="{% static 'web/js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'web/js/bootstrap.min.js'%}"></script>
-    <script src="{% static 'web/js/jquery.nice-select.min.js'%}"></script>
-    <script src="{% static 'web/js/jquery-ui.min.js'%}"></script>
-    <script src="{% static 'web/js/jquery.slicknav.js'%}"></script>
-    <script src="{% static 'web/js/mixitup.min.js'%}"></script>
-    <script src="{% static 'web/js/owl.carousel.min.js'%}"></script>
-    <script src="{% static 'web/js/main.js'%}"></script>
-
-
-
-
-
-</body></html>

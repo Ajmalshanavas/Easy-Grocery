@@ -24,7 +24,7 @@ from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
 from EasyGrocery import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('Store/',include(Adminapp.urls)),
+    path('',include(Adminapp.urls)),
     path('Easygrocery/',include(webapp.urls)),
 
 ]

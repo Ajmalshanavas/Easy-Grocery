@@ -66,12 +66,19 @@ def contact(request):
     return render(request,"contact.html",{'categories': categories,'latest_products':latest_products,'cart_count':cart_count})
 
 def save_contact(request):
-    if request.method=="POST":
-        name=request.POST.get('Name')
-        email = request.POST.get('Email')
+    if request.method == "POST":
+        name    = request.POST.get('Name')
+        email   = request.POST.get('Email')
         message = request.POST.get('Message')
-        obj=ContactDb(Name=name,Email=email,Message=message)
+
+        # Check if this email has already submitted a message
+        if ContactDb.objects.filter(Email=email).exists():
+            messages.error(request, "This email address has already been used to send a message.")
+            return redirect(contact)
+
+        obj = ContactDb(Name=name, Email=email, Message=message)
         obj.save()
+        messages.success(request, "Message sent successfully! We will get back to you soon.")
         return redirect(contact)
 
 def Sign_in(request):
